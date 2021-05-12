@@ -4,15 +4,21 @@
  *
  *
  */
+require('dotenv').config()
+
 const amqp = require("amqplib/callback_api");
-const io = require("socket.io")(process.env.PORT || 80, {
+
+const socketioPort = process.env.PORT || 80
+
+const io = require("socket.io")(socketioPort, {
   cors: {
     origin: "*",
   },
 });
 
+console.log('listening on port ' + socketioPort)
+
 io.on("connection", (socket) => {
-  console.log(socket);
 
   socket.on("silo:join", (silo) => {
     socket.join(silo);
@@ -48,15 +54,15 @@ amqp.connect(process.env.RABBITMQ_URL, (error0, connection) => {
           switch (type) {
             case "reading:new":
               io.to(data.silo).emit("parameter:reading", {
-                type,
+                type: data.type,
                 value: data.value,
                 active: data.active,
               });
 
               break;
             case "reading:threshold-reached":
-              io.to(msg.data.silo).emit("parameter:threshold-reached", {
-                type,
+              io.to(data.silo).emit("parameter:threshold-reached", {
+                type: data.type,
                 value: data.value,
               });
 
