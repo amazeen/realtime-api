@@ -1,0 +1,33 @@
+{
+  "name": "realtime-api",
+  "version": "1.0.0",
+  "description": "Api used to send data in realtime to connected clients",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "mocha src/tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sugo-code/realtime-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sugo-code/realtime-api/issues"
+  },
+  "homepage": "https://github.com/sugo-code/realtime-api#readme",
+  "dependencies": {
+    "amqplib": "^0.7.1",
+    "dotenv": "^9.0.2",
+    "socket.io": "^4.1.0",
+    "socket.io-client": "^4.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.4.0",
+    "nodemon": "^2.0.7"
+  }
+}
