@@ -8,3 +8,9 @@ services:
     environment: 
       PORT:              3000
       RABBITMQ_URL:      ${RABBITMQ_URL:?RABBITMQ_URL is missing}
+    logging:
+      driver: awslogs
+      options:
+        awslogs-region: ${LOG_REGION:?LOG_REGION is missing}
+        awslogs-group:  ${LOG_GROUP:?LOG_GROUP is missing}
+        mode:           non-blocking
